@@ -37,6 +37,7 @@ public class classifictionActivity extends AppCompatActivity {
     private ListView picList;
 
     private String modelName;
+    private static final int imageNumber  = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +67,18 @@ public class classifictionActivity extends AppCompatActivity {
         costTime.setText("推理耗时：");
 
         beginInference = findViewById(R.id.classification_start_infer);
-        final String[] classNameInference = new String[20];
+        final String[] classNameInference = new String[imageNumber];
 
         beginInference.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Module module = null;
-                Bitmap[] bitmapOfPic = new Bitmap[20];
+                Bitmap[] bitmapOfPic = new Bitmap[imageNumber];
 //                 Toast.makeText(classifictionActivity.this,"btn3被点击了",Toast.LENGTH_SHORT).show();
                 try {
                     // creating bitmap from packaged into app android asset 'image.jpg',
                     // app/src/main/assets/image3.jpg
-                    for (int picNO = 0; picNO < 20; picNO++)
+                    for (int picNO = 0; picNO < imageNumber; picNO++)
                         bitmapOfPic[picNO] = BitmapFactory.decodeStream(getAssets().open("image"+String.valueOf(picNO)+".jpg"));
 
                     // loading serialized torchscript module from packaged into app android asset model.pt,
@@ -92,7 +93,7 @@ public class classifictionActivity extends AppCompatActivity {
 
                 long diff = 0;
 
-                for (int picNO = 0; picNO < 20; picNO++) {
+                for (int picNO = 0; picNO < imageNumber; picNO++) {
 
                     Tensor inputTensor = TensorImageUtils.bitmapToFloat32Tensor(bitmapOfPic[picNO],
                             NORM_MEAN,NORM_STD, MemoryFormat.CHANNELS_LAST);

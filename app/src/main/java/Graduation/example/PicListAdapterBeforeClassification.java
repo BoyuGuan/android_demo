@@ -24,7 +24,7 @@ public class PicListAdapterBeforeClassification extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 20;
+        return 50;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class PicListAdapterBeforeClassification extends BaseAdapter {
 
         }
 
-        String className = cifarClass.CIFAR_CLASS[i/2];
+        String className = cifarClass.CIFAR_CLASS[i/5];
         //给空间赋值
         holder.tvTitle.setText("第" + String.valueOf(i+1) + "张照片");
         holder.tvClassOriginal.setText("类别："+className);
