@@ -55,6 +55,7 @@
     </RadioGroup>
 
     <Button
+        android:id="@+id/classification_start_infer"
         android:layout_width="120dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
