@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AIMET</string>
+    <string name="documention_text">这是东北大学理学院信计1801班学生管博宇的毕业设计展示demo，学号20182526。\n本项目是为了展示模型压缩在边设备上的重要作用。</string>
+</resources>

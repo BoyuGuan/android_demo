@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:id="@+id/tv_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:background="#FF546684"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="image title"
+            android:textSize="15sp"
+            android:textColor="@color/teal_700"/>
+
+        <TextView
+            android:id="@+id/tv_class_original"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="类别："
+            android:textSize="15sp"
+            android:textColor="#C19846"/>
+        <TextView
+            android:id="@+id/tv_class_classification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="识别类别:"
+            android:textSize="15sp"
+            android:textColor="#C19846"/>
+    </LinearLayout>
+
+</LinearLayout>

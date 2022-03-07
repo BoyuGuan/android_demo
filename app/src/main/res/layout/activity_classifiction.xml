@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".classifictionActivity"
+    android:orientation="vertical"
+    android:background="#9FC2B6F0">
+
+    <TextView
+        android:id="@+id/class_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="加载模型对100张图片进行分类"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择模型"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"/>
+
+    <RadioGroup
+        android:id="@+id/rg_model_choose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp">
+
+        <RadioButton
+            android:id="@+id/rb_original_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="原模型  "
+            android:checked="true"
+            android:drawableRight="@drawable/walk_icon"
+            android:textColor="#FFAF3620"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="15dp"/>
+        <RadioButton
+            android:id="@+id/rb_compressed_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="压缩后模型  "
+            android:drawableRight="@drawable/car_icon"
+            android:textColor="#CF3CA620"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+    </RadioGroup>
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/inference"
+        android:text="开始推理"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/cost_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="识别耗时："
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"/>
+
+    <ListView
+        android:id="@+id/list_view_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

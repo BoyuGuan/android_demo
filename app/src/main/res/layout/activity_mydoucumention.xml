@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".doucumentionActivity"
+    android:orientation="vertical"
+    android:background="#9FC2B6F0">
+    <TextView
+        android:id="@+id/documention_text_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="@string/documention_text"
+        android:textSize="20sp"
+        />
+
+
+
+</LinearLayout>
