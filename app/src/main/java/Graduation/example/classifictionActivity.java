@@ -60,12 +60,13 @@ public class classifictionActivity extends AppCompatActivity {
 
         // 原列表设置
         picList = findViewById(R.id.list_view_pic);
-        picList.setAdapter(new PicListAdapter(classifictionActivity.this));
+        picList.setAdapter(new PicListAdapterBeforeClassification(classifictionActivity.this));
 
         costTime = findViewById(R.id.cost_time);
         costTime.setText("推理耗时：");
 
         beginInference = findViewById(R.id.classification_start_infer);
+        final String[] classNameInference = new String[20];
 
         beginInference.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,17 +103,25 @@ public class classifictionActivity extends AppCompatActivity {
                     long end = System.currentTimeMillis( );
                     diff += end - start;
 
-//                    float[] scores = outputTensor.getDataAsFloatArray();
-//                    // searching for the index with maximum score
-//                    float maxScore = -Float.MAX_VALUE;
-//                    int maxScoreIdx = -1;
-//                    for (int i = 0; i < scores.length; i++) {
-//                        if (scores[i] > maxScore) {
-//                            maxScore = scores[i];
-//                            maxScoreIdx = i;
-//                        }
-//                    }
+                    float[] scores = outputTensor.getDataAsFloatArray();
+                    // searching for the index with maximum score
+                    float maxScore = -Float.MAX_VALUE;
+                    int maxScoreIdx = -1;
+                    for (int i = 0; i < scores.length; i++) {
+                        if (scores[i] > maxScore) {
+                            maxScore = scores[i];
+                            maxScoreIdx = i;
+                        }
+                    }
+                    classNameInference[picNO] = cifarClass.CIFAR_CLASS[maxScoreIdx];
                 }
+
+                // 更新点之后的列表
+                picList = findViewById(R.id.list_view_pic);
+                picList.setAdapter(new PicListAdapterAfterClassification(classifictionActivity.this, classNameInference ));
+
+
+
 
                 String costTimeOfClassification = String.valueOf(diff);
                 costTime.setText("推理耗时：" + costTimeOfClassification);

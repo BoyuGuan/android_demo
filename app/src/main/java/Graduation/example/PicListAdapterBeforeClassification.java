@@ -13,11 +13,11 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
-public class PicListAdapter extends BaseAdapter {
+public class PicListAdapterBeforeClassification extends BaseAdapter {
     private Context mcontext;
     private LayoutInflater mLayoutInflater;
 
-    PicListAdapter(Context context){
+    PicListAdapterBeforeClassification(Context context){
         this.mcontext = context;
         mLayoutInflater = LayoutInflater.from(context);
     }
