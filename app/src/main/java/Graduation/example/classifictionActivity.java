@@ -63,7 +63,7 @@ public class classifictionActivity extends AppCompatActivity {
         picList.setAdapter(new PicListAdapter(classifictionActivity.this));
 
         costTime = findViewById(R.id.cost_time);
-        costTime.setText("推理耗时：sad");
+        costTime.setText("推理耗时：");
 
         beginInference = findViewById(R.id.classification_start_infer);
 
@@ -71,12 +71,13 @@ public class classifictionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Module module = null;
-                Bitmap bitmap = null;
+                Bitmap[] bitmapOfPic = new Bitmap[20];
 //                 Toast.makeText(classifictionActivity.this,"btn3被点击了",Toast.LENGTH_SHORT).show();
                 try {
                     // creating bitmap from packaged into app android asset 'image.jpg',
                     // app/src/main/assets/image3.jpg
-                    bitmap = BitmapFactory.decodeStream(getAssets().open("image11.jpg"));
+                    for (int picNO = 0; picNO < 20; picNO++)
+                        bitmapOfPic[picNO] = BitmapFactory.decodeStream(getAssets().open("image"+String.valueOf(picNO)+".jpg"));
 
                     // loading serialized torchscript module from packaged into app android asset model.pt,
                     // app/src/model/assets/model.pt
@@ -88,34 +89,39 @@ public class classifictionActivity extends AppCompatActivity {
                 float[] NORM_MEAN = new float[] {0.4914f, 0.4822f, 0.4465f} ;
                 float[] NORM_STD = new float[] {0.2023f, 0.1994f, 0.2010f} ;
 
-                Tensor inputTensor = TensorImageUtils.bitmapToFloat32Tensor(bitmap,
-                        NORM_MEAN,NORM_STD, MemoryFormat.CHANNELS_LAST);
+                long diff = 0;
 
-                Tensor outputTensor = module.forward(IValue.from(inputTensor)).toTensor();
+                for (int picNO = 0; picNO < 20; picNO++) {
 
-                float[] scores = outputTensor.getDataAsFloatArray();
-                // searching for the index with maximum score
-                float maxScore = -Float.MAX_VALUE;
-                int maxScoreIdx = -1;
-                for (int i = 0; i < scores.length; i++) {
-                    if (scores[i] > maxScore) {
-                        maxScore = scores[i];
-                        maxScoreIdx = i;
-                    }
+                    Tensor inputTensor = TensorImageUtils.bitmapToFloat32Tensor(bitmapOfPic[picNO],
+                            NORM_MEAN,NORM_STD, MemoryFormat.CHANNELS_LAST);
+
+                    // 计时开始
+                    long start = System.currentTimeMillis( );
+                    Tensor outputTensor = module.forward(IValue.from(inputTensor)).toTensor();
+                    long end = System.currentTimeMillis( );
+                    diff += end - start;
+
+//                    float[] scores = outputTensor.getDataAsFloatArray();
+//                    // searching for the index with maximum score
+//                    float maxScore = -Float.MAX_VALUE;
+//                    int maxScoreIdx = -1;
+//                    for (int i = 0; i < scores.length; i++) {
+//                        if (scores[i] > maxScore) {
+//                            maxScore = scores[i];
+//                            maxScoreIdx = i;
+//                        }
+//                    }
                 }
 
-                String className = cifarClass.CIFAR_CLASS[maxScoreIdx];
-                costTime.setText("推理耗时：" + className);
+                String costTimeOfClassification = String.valueOf(diff);
+                costTime.setText("推理耗时：" + costTimeOfClassification);
+
             }
         });
 
 
     }
-//            long start = System.currentTimeMillis( );
-//            Thread.sleep(60*3);
-//            long end = System.currentTimeMillis( );
-//            long diff = end - start;
-//            String costTimeTemp = String.valueOf(diff);
 
 
     /**
