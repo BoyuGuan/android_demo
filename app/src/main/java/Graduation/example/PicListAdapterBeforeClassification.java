@@ -16,9 +16,11 @@ import java.io.IOException;
 public class PicListAdapterBeforeClassification extends BaseAdapter {
     private Context mcontext;
     private LayoutInflater mLayoutInflater;
+    private int myGalleryName;
 
-    PicListAdapterBeforeClassification(Context context){
+    PicListAdapterBeforeClassification(Context context, int GalleryName){
         this.mcontext = context;
+        this.myGalleryName = GalleryName;
         mLayoutInflater = LayoutInflater.from(context);
     }
 
@@ -68,7 +70,7 @@ public class PicListAdapterBeforeClassification extends BaseAdapter {
         try {
             // creating bitmap from packaged into app android asset 'image.jpg',
             // app/src/main/assets/image3.jpg
-            bitmap = BitmapFactory.decodeStream(mcontext.getAssets().open("image"+String.valueOf(i) +".jpg"));
+            bitmap = BitmapFactory.decodeStream(mcontext.getAssets().open("image_"+String.valueOf(myGalleryName)+"_"+String.valueOf(i) +".jpg"));
 
         } catch (IOException e) {
             Log.e("PytorchHelloWorld", "Error reading assets", e);

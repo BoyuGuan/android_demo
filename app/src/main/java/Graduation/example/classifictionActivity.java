@@ -31,12 +31,13 @@ import java.io.OutputStream;
 
 public class classifictionActivity extends AppCompatActivity {
 
-    private RadioGroup modelChoose;
+    private RadioGroup modelChoose, gallery;
     private TextView costTime;
     private Button beginInference;
     private ListView picList;
 
     private String modelName;
+    private int galleryName;
     private static final int imageNumber  = 50;
 
     @Override
@@ -59,9 +60,25 @@ public class classifictionActivity extends AppCompatActivity {
             }
         });
 
+        // 图库选择监视
+        galleryName = 0;
+        gallery = findViewById(R.id.rg_gallery_choose);
+        gallery.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton galleryChoosed = findViewById(i);
+                if (galleryChoosed.getText() == "图片库1")
+                    galleryName = 0;
+                else
+                    galleryName = 1;
+                Toast.makeText(classifictionActivity.this, "您选择："+galleryChoosed.getText(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         // 原列表设置
         picList = findViewById(R.id.list_view_pic);
-        picList.setAdapter(new PicListAdapterBeforeClassification(classifictionActivity.this));
+        picList.setAdapter(new PicListAdapterBeforeClassification(classifictionActivity.this, galleryName));
 
         costTime = findViewById(R.id.cost_time);
         costTime.setText("推理耗时：");
@@ -79,7 +96,7 @@ public class classifictionActivity extends AppCompatActivity {
                     // creating bitmap from packaged into app android asset 'image.jpg',
                     // app/src/main/assets/image3.jpg
                     for (int picNO = 0; picNO < imageNumber; picNO++)
-                        bitmapOfPic[picNO] = BitmapFactory.decodeStream(getAssets().open("image"+String.valueOf(picNO)+".jpg"));
+                        bitmapOfPic[picNO] = BitmapFactory.decodeStream(getAssets().open("image_"+String.valueOf(galleryName)+"_" +String.valueOf(picNO)+".jpg"));
 
                     // loading serialized torchscript module from packaged into app android asset model.pt,
                     // app/src/model/assets/model.pt
@@ -119,7 +136,7 @@ public class classifictionActivity extends AppCompatActivity {
 
                 // 更新点之后的列表
                 picList = findViewById(R.id.list_view_pic);
-                picList.setAdapter(new PicListAdapterAfterClassification(classifictionActivity.this, classNameInference ));
+                picList.setAdapter(new PicListAdapterAfterClassification(classifictionActivity.this, classNameInference ,galleryName));
 
 
 

@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">AIMET</string>
-    <string name="documention_text">这是东北大学理学院信计1801班学生管博宇的毕业设计展示demo，学号20182526。\n本项目是为了展示模型压缩在边设备上的重要作用。</string>
+    <string name="documention_text_1">这是东北大学理学院信计1801班学生管博宇的毕业设计展示demo，学号20182526。
+        \n本项目是为了展示模型压缩在边设备上的重要作用。
+        \n本项目应用了AIMET作为压缩框架，探究了pytorch模型压缩前后在以安卓手机为代表的边际设备上的部署。
+        \n想使用该APP，需要点击首页的“开始使用按钮”，新弹出的页面中，选则想要进行测试的模型。
+        \n选择“原模型”选项时，系统会加载torchvision.models中的resnet18进行训练。
+        \n选择“压缩后模型”选项时，系统会加载AIMET按照计算量进行0.5压缩的torchvision.models.resnet18进行训练。</string>
+    <string name="documention_text_2">然后点击开始测试按钮。
+        \nAPP会自动加载模型进行测试，在测试完毕之后会在显示测试耗时和在下方列表中显示测试结果。
+        \n因为缓存cache，程序的局部性原理等原因，在测试完一种模型之后，若想测试下一种模型需要将此程序上滑关闭并重新打开再进行测试。</string>
 </resources>

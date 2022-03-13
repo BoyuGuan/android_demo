@@ -18,11 +18,13 @@ public class PicListAdapterAfterClassification extends BaseAdapter {
     private Context mcontext;
     private LayoutInflater mLayoutInfalter;
     private String[] myClassNameInference;
+    private int myGalleryName;
 
-    PicListAdapterAfterClassification(Context context, String[] classNameInference){
+    PicListAdapterAfterClassification(Context context, String[] classNameInference, int galleryName){
         this.mcontext = context;
         mLayoutInfalter = LayoutInflater.from(context);
         myClassNameInference = classNameInference;
+        myGalleryName = galleryName;
     }
 
     @Override
@@ -68,7 +70,7 @@ public class PicListAdapterAfterClassification extends BaseAdapter {
         try {
             // creating bitmap from packaged into app android asset 'image.jpg',
             // app/src/main/assets/image3.jpg
-            bitmap = BitmapFactory.decodeStream(mcontext.getAssets().open("image"+String.valueOf(i) +".jpg"));
+            bitmap = BitmapFactory.decodeStream(mcontext.getAssets().open("image_"+String.valueOf(myGalleryName)+"_"+String.valueOf(i) +".jpg"));
 
         } catch (IOException e) {
             Log.e("PytorchHelloWorld", "Error reading assets", e);
