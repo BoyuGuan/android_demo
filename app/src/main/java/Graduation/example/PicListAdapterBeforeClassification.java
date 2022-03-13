@@ -61,7 +61,11 @@ public class PicListAdapterBeforeClassification extends BaseAdapter {
 
         }
 
-        String className = cifarClass.CIFAR_CLASS[i/5];
+        String className = null;
+        if (myGalleryName == 0)
+            className = cifarClass.IMAGE_0_CLASS[i];
+        else
+            className = cifarClass.IMAGE_1_CLASS[i];
         //给空间赋值
         holder.tvTitle.setText("第" + String.valueOf(i+1) + "张照片");
         holder.tvClassOriginal.setText("类别："+className);
