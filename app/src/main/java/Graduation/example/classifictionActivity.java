@@ -32,6 +32,8 @@ import java.io.OutputStream;
 public class classifictionActivity extends AppCompatActivity {
 
     private RadioGroup modelChoose, gallery;
+    private RadioButton model_1,model_2, gallery_1, gallery_2;
+
     private TextView costTime;
     private Button beginInference;
     private ListView picList;
@@ -48,12 +50,14 @@ public class classifictionActivity extends AppCompatActivity {
         //模型选择监视
         modelName = "resnet18_original_model.pt";
         modelChoose = findViewById(R.id.rg_model_choose);
+        model_1 = findViewById(R.id.rb_original_model);
+        model_2 = findViewById(R.id.rb_compressed_model);
         modelChoose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton modelChoosed = findViewById(i);
-                if (modelChoosed.getText() == "原模型")
-                    modelName = "resnet18_original_model.pt;" ;
+                if (model_1.isChecked())
+                    modelName = "resnet18_original_model.pt" ;
                 else
                     modelName = "resnet18_model_for_mobile.pt";
                 Toast.makeText(classifictionActivity.this, "您选择："+modelChoosed.getText(),Toast.LENGTH_SHORT).show();
@@ -63,15 +67,18 @@ public class classifictionActivity extends AppCompatActivity {
         // 图库选择监视
         galleryName = 0;
         gallery = findViewById(R.id.rg_gallery_choose);
+        gallery_1 = findViewById(R.id.rb_gallery_1);
+        gallery_2 = findViewById(R.id.rb_gallery_2);
+
         gallery.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                RadioButton galleryChoosed = findViewById(i);
-                if (galleryChoosed.getText() == "图片库1")
+                if (gallery_1.isChecked())
                     galleryName = 0;
                 else
                     galleryName = 1;
-                Toast.makeText(classifictionActivity.this, "您选择："+galleryChoosed.getText(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(classifictionActivity.this, "您选择第"+ String.valueOf(galleryName+1)+"组图片",Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -91,13 +98,11 @@ public class classifictionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Module module = null;
                 Bitmap[] bitmapOfPic = new Bitmap[imageNumber];
-//                 Toast.makeText(classifictionActivity.this,"btn3被点击了",Toast.LENGTH_SHORT).show();
                 try {
                     // creating bitmap from packaged into app android asset 'image.jpg',
                     // app/src/main/assets/image3.jpg
                     for (int picNO = 0; picNO < imageNumber; picNO++)
                         bitmapOfPic[picNO] = BitmapFactory.decodeStream(getAssets().open("image_"+String.valueOf(galleryName)+"_" +String.valueOf(picNO)+".jpg"));
-
                     // loading serialized torchscript module from packaged into app android asset model.pt,
                     // app/src/model/assets/model.pt
                     module = LiteModuleLoader.load(assetFilePath(classifictionActivity.this, modelName));
