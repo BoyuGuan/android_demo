@@ -3,6 +3,7 @@ package Graduation.example;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,11 @@ public class PicListAdapterAfterClassification extends BaseAdapter {
         holder.tvTitle.setText("第" + String.valueOf(i+1) + "张照片");
         holder.tvClassOriginal.setText("类别："+className);
         holder.tvClassClassification.setText("识别类别：" + myClassNameInference[i]);
+        if (myClassNameInference[i] == className )
+            holder.tvClassClassification.setTextColor(Color.parseColor("#FF6B8530"));
+        else
+            holder.tvClassClassification.setTextColor(Color.parseColor("#FFB81A2D"));
+
         Bitmap bitmap = null;
         try {
             // creating bitmap from packaged into app android asset 'image.jpg',

@@ -78,7 +78,6 @@ public class classifictionActivity extends AppCompatActivity {
                 else
                     galleryName = 1;
                 Toast.makeText(classifictionActivity.this, "您选择第"+ String.valueOf(galleryName+1)+"组图片",Toast.LENGTH_SHORT).show();
-
             }
         });
 
