@@ -1,7 +1,6 @@
-## Quickstart
+## 项目说明
 
-[HelloWorld](https://github.com/pytorch/android-demo-app/tree/master/HelloWorldApp) is a simple image classification application that demonstrates how to use PyTorch Android API.
-This application runs TorchScript serialized TorchVision pretrained [MobileNet v3 model](https://pytorch.org/vision/stable/models.html) on static image which is packaged inside the app as android asset.
+此项目为我的毕业设计在安卓设备上的展示demo，此项目开发了一个安卓app用来展示AIMET对模型的压缩效果，以此展示模型压缩在边际设备上的重要应用。
 
 #### 1. Model Preparation
 
